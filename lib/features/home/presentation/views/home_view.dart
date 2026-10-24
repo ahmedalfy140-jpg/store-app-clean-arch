@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:store_app_clean_arch/features/onBoarding/presentaion/views/onBoarding_view.dart';
+import 'package:store_app_clean_arch/features/onBoarding/presentation/views/onBoarding_view.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});

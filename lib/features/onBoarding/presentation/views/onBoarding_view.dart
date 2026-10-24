@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:store_app_clean_arch/features/home/presentaion/views/home_view.dart';
+import 'package:store_app_clean_arch/features/home/presentation/views/home_view.dart';
 
 class OnboardingView extends StatefulWidget {
   const OnboardingView({super.key});
