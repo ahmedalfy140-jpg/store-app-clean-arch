@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:store_app_clean_arch/features/home/presentation/views/home_view.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
+   void _onIntroEnd ( BuildContext context){
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=>const HomeView()));
+  }
 
   static const _blue = Color(0xFF1A2BFF);
 
@@ -50,6 +54,7 @@ class OnboardingScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(40),
                   onTap: () {
                     // Navigator.pushReplacement(... LoginScreen())
+                    _onIntroEnd(context);
                   },
                   child: const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 18),
