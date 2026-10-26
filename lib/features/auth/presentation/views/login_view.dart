@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:store_app_clean_arch/features/auth/presentation/views/signup_view.dart';
 import 'package:store_app_clean_arch/features/auth/presentation/views/widgets/custom_botton.dart';
 import 'package:store_app_clean_arch/features/auth/presentation/views/widgets/custom_text_field.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
+   static String id = 'lOG In';
 
   @override
   State<LoginView> createState() => _LoginViewState();
@@ -147,6 +149,7 @@ class _LoginViewState extends State<LoginView> {
                         GestureDetector(
                           onTap: () {
                             // Navigate to registration screen
+                            Navigator.pushNamed(context,SignUpView.id );
                             
                           },
                           child: const Text(
