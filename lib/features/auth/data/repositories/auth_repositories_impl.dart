@@ -8,7 +8,7 @@ class AuthRepositoriesImpl implements AuthRepositories {
   AuthRepositoriesImpl(this._authService);
   @override
   Future<UserCredential> login({required String email, required String password}) {
-    return _authService.rgister(email: email, password: password);
+    return _authService.login(email: email, password: password);
   }
 
   @override
@@ -19,6 +19,6 @@ class AuthRepositoriesImpl implements AuthRepositories {
 
   @override
   Future<UserCredential> rgister({required String email, required String password}) {
-   return _authService.login(email: email, password: password);
+   return _authService.rgister(email: email, password: password);
   }
 }

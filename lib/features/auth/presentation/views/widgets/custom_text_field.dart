@@ -7,13 +7,15 @@ class CustomTextFormField extends StatelessWidget {
     this.labelText,
     this.iconData,
     this.validator,
-    this.isobscure=false, this.iconButton
+    this.isobscure=false, this.iconButton,
+    this.controller
    
   });
   final String? labelText;
   final IconData? iconData;
   final String? Function(String?)? validator;
 final  bool isobscure;
+final TextEditingController? controller;
 
 
  
@@ -24,6 +26,7 @@ final  bool isobscure;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
        
       obscureText:  isobscure,
       validator: validator,

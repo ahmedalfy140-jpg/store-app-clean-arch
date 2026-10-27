@@ -1,175 +1,243 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:store_app_clean_arch/features/auth/data/repositories/auth_repositories_impl.dart';
+import 'package:store_app_clean_arch/features/auth/data/services/firebase_auth_service.dart';
+import 'package:store_app_clean_arch/features/auth/presentation/manager/cubit/auth_cubit_cubit.dart';
 import 'package:store_app_clean_arch/features/auth/presentation/views/signup_view.dart';
 import 'package:store_app_clean_arch/features/auth/presentation/views/widgets/custom_botton.dart';
 import 'package:store_app_clean_arch/features/auth/presentation/views/widgets/custom_text_field.dart';
+import 'package:store_app_clean_arch/features/home/presentation/views/home_view.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
-   static String id = 'lOG In';
+  static String id = 'lOG In';
 
   @override
   State<LoginView> createState() => _LoginViewState();
 }
 
 class _LoginViewState extends State<LoginView> {
-   String? emailAdreess;
+  String? emailAdreess;
   String? password;
   bool _isObscured = true;
+  final GlobalKey<FormState> fromkey = GlobalKey();
+    final TextEditingController emailController = TextEditingController();
+final TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Positioned.fill(
-              child: Image.asset('assets/img7.jpg', fit: BoxFit.cover),
-            ),
+    return BlocProvider(
+      create: (context) =>
+          AuthCubitCubit(AuthRepositoriesImpl(FirebaseAuthService())),
 
-            Positioned.fill(
-              child: Container(color: Colors.black.withValues(alpha: 0.3)),
-            ),
-            Positioned(
-              top: 25,
-              left: 25,
-              right: 25,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-
-                children: [
-                  Text(
-                    'STYLE',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 7,
-                    ),
-                  ),
-                  SizedBox(height: 5),
-                  Text(
-                    'F A S H I O N   S T O R E',
-                    style: TextStyle(
-                      color: Colors.white70,
-                      fontSize: 11,
-
-                      letterSpacing: 1,
-                    ),
-                  ),
-                  SizedBox(height: 180),
-                  Text(
-                    'Welcome\nBlack',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 54,
-                      height: 1,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  SizedBox(height: 15),
-                  Text(
-                    'Sign in to discover your style',
-                    style: TextStyle(color: Colors.white70, fontSize: 17),
-                  ),
-                ],
+      child: Scaffold(
+        body: SafeArea(
+          child: Stack(
+            children: [
+              Positioned.fill(
+                child: Image.asset('assets/img7.jpg', fit: BoxFit.cover),
               ),
-            ),
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Color(0xFFF5F1E9),
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+
+              Positioned.fill(
+                child: Container(color: Colors.black.withValues(alpha: 0.3)),
+              ),
+              Positioned(
+                top: 25,
+                left: 25,
+                right: 25,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+
+                  children: [
+                    Text(
+                      'STYLE',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 7,
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    Text(
+                      'F A S H I O N   S T O R E',
+                      style: TextStyle(
+                        color: Colors.white70,
+                        fontSize: 11,
+
+                        letterSpacing: 1,
+                      ),
+                    ),
+                    SizedBox(height: 180),
+                    Text(
+                      'Welcome\nBlack',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 54,
+                        height: 1,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(height: 15),
+                    Text(
+                      'Sign in to discover your style',
+                      style: TextStyle(color: Colors.white70, fontSize: 17),
+                    ),
+                  ],
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(24.0),
-                  child: Column(children: [
-                    CustomTextFormField(
-                      onchange: (data){
-                        emailAdreess=data;
-
-                      },
-                      validator: (value){
-                        if(value ==null || value.isEmpty){
-                           return 'Please enter your email';
-                        }if(RegExp( r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',).hasMatch(value)){
-                            return 'Please enter a valid email address';
-                        }
-                        return null;
-                      },
-                      labelText: 'Email Address',
-                      iconData: Icons.email_outlined,
+              ),
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Color(0xFFF5F1E9),
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(24),
                     ),
-                    SizedBox(height: 15,),
-                    CustomTextFormField(
-                        validator: (data) {
-                        if (data == null || data.isEmpty) {
-                          return 'please enter ypur password';
-                        }
-                        if (data.length < 6) {
-                          return 'Password must be at least 6 characters';
-                        }
-                        return null;
-                      },
-                      onchange: (data){
-                        password=data;
-                      },
-                      isobscure: _isObscured,
-                      iconButton: IconButton(onPressed:(){
-                        setState(() {
-                          _isObscured=!_isObscured;
-                        });
-                      } , icon: Icon(_isObscured ? Icons.visibility_off : Icons.visibility)),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(24.0),
+                    child: Form(
+                      key: fromkey,
+                      child: Column(
+                        children: [
+                          CustomTextFormField(
+                            controller: emailController,
+                            onchange: (data) {
+                              emailAdreess = data;
+                            },
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your email';
+                              }
+                              if (!RegExp(
+                                r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+                              ).hasMatch(value)) {
+                                return 'Please enter a valid email address';
+                              }
+                              return null;
+                            },
+                            labelText: 'Email Address',
+                            iconData: Icons.email_outlined,
+                          ),
+                          SizedBox(height: 15),
+                          CustomTextFormField(
+                            controller: passwordController,
+                            validator: (data) {
+                              if (data == null || data.isEmpty) {
+                                return 'please enter ypur password';
+                              }
+                              if (data.length < 6) {
+                                return 'Password must be at least 6 characters';
+                              }
+                              return null;
+                            },
+                            onchange: (data) {
+                              password = data;
+                            },
+                            isobscure: _isObscured,
+                            iconButton: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  _isObscured = !_isObscured;
+                                });
+                              },
+                              icon: Icon(
+                                _isObscured
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                              ),
+                            ),
 
-                       labelText: 'Password',
-                      iconData: Icons.lock_outline,
-                    ),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: TextButton(
-                        onPressed: (){},
-                        child: Text(
-                          'Forgot Password?',
-                          style: TextStyle(color: Colors.blueAccent),
-                        ),)),
-                        SizedBox(height: 20,),
-                        customButton(
-                          nameButton: 'Login',
-                          onpressed: (){}
-                          ,
-                        ),
-                        const SizedBox(height: 24),
-
-                    // Register Link
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text("Don't have an account? "),
-                        GestureDetector(
-                          onTap: () {
-                            // Navigate to registration screen
-                            Navigator.pushNamed(context,SignUpView.id );
-                            
-                          },
-                          child: const Text(
-                            'Sign Up',
-                            style: TextStyle(
-                              color: Colors.blueAccent,
-                              fontWeight: FontWeight.bold,
+                            labelText: 'Password',
+                            iconData: Icons.lock_outline,
+                          ),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                'Forgot Password?',
+                                style: TextStyle(color: Colors.blueAccent),
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                          SizedBox(height: 20),
+                          BlocConsumer<AuthCubitCubit, AuthCubitState>(
+                            listener: (context, state) {
+                              if (state is AuthCubitSucsess) {
+                                showsnackbar(context, 'Login successful!');
+                                Navigator.pushReplacement(context,MaterialPageRoute(builder: ((context) => HomeView())));
+                              } else if (state is AuthCubitFailure) {
+                                showsnackbar(context, state.errorMessage);
+                              }
+                            },
+                            builder: (context, state) {
+                              if (state is AuthCubitLoading) {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              }
+
+                              return customButton(
+                                nameButton: 'Login',
+                                onpressed: () async{
+                                  if (fromkey.currentState!.validate()) {
+                                   await context.read<AuthCubitCubit>().login(
+                                      email: emailAdreess!,
+                                      password: password!,
+                                    );
+                                  }
+                                  emailController.clear();
+                                  passwordController.clear();
+                                },
+                              );
+                            },
+                          ),
+
+                          const SizedBox(height: 24),
+
+                          // Register Link
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text("Don't have an account? "),
+                              GestureDetector(
+                                onTap: () {
+                                  // Navigate to registration screen
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (_) => const SignUpView(),
+                                    ),
+                                  );
+                                },
+                                child: const Text(
+                                  'Sign Up',
+                                  style: TextStyle(
+                                    color: Colors.blueAccent,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                        
-                  ]),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  void showsnackbar(BuildContext context, String message) {
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message)));
   }
 }

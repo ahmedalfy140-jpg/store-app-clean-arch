@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:store_app_clean_arch/features/auth/presentation/views/login_view.dart';
 import 'package:store_app_clean_arch/features/home/presentation/views/home_view.dart';
 import 'package:store_app_clean_arch/features/onBoarding/presentation/views/widgets/onboarding_2_view.dart';
 
@@ -21,7 +22,7 @@ class _OnboardingViewState extends State<OnboardingView> {
   final introKey =GlobalKey<IntroductionScreenState>();
 
   void _onIntroEnd ( BuildContext context){
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=>const OnboardingScreen()));
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=>const LoginView()));
   }
     Widget _buildImage(String assetName, [double width = 350]) {
     return Image.asset('assets/$assetName', width: width);
@@ -53,7 +54,7 @@ class _OnboardingViewState extends State<OnboardingView> {
           child: Padding(
             padding: const EdgeInsets.only(top: 16, right: 16),
             child: TextButton(onPressed: (){
-              _onIntroEnd(context);
+              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=>const OnboardingScreen()));
             }, child: Text('Skip'))
 
           ),
