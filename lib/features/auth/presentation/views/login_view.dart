@@ -206,7 +206,7 @@ final TextEditingController passwordController = TextEditingController();
                               GestureDetector(
                                 onTap: () {
                                   // Navigate to registration screen
-                                  Navigator.of(context).push(
+                                  Navigator.pushReplacement(context,
                                     MaterialPageRoute(
                                       builder: (_) => const SignUpView(),
                                     ),
