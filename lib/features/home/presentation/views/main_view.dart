@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:store_app_clean_arch/features/catrgories/presentation/view/category_card_view.dart';
+
 import 'package:store_app_clean_arch/features/home/presentation/manager/bottom_nav_cubit.dart';
-import 'package:store_app_clean_arch/features/home/presentation/views/categoties_view.dart';
+
 import 'package:store_app_clean_arch/features/home/presentation/views/favorites_view.dart';
 import 'package:store_app_clean_arch/features/home/presentation/views/home_view.dart';
 import 'package:store_app_clean_arch/features/home/presentation/views/profile_view.dart';
@@ -12,28 +14,27 @@ class MainView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(create:(context)=> BottomNavCubit(),
-     child:BlocBuilder<BottomNavCubit,int>(builder:(context,currentIndex){
-      final List<Widget>pages =[ const HomeView(),
+    return BlocProvider(
+      create: (context) => BottomNavCubit(),
+      child: BlocBuilder<BottomNavCubit, int>(
+        builder: (context, currentIndex) {
+          final List<Widget> pages = [
+            const HomeView(),
             const CategoriesView(),
             const FavoritesView(),
-            const ProfileView(),];
-            return Scaffold(
-              body: IndexedStack(
-                index: currentIndex,
-                children: pages,
-              ),
-              bottomNavigationBar: CustomBottomBar(currentIndex: currentIndex, onTap: (index){
+            const ProfileView(),
+          ];
+          return Scaffold(
+            body: IndexedStack(index: currentIndex, children: pages),
+            bottomNavigationBar: CustomBottomBar(
+              currentIndex: currentIndex,
+              onTap: (index) {
                 context.read<BottomNavCubit>().changeTap(index);
-              }),
-            );
-     }
-     
-     
-     
-      )
-     
-     
-      ,);
+              },
+            ),
+          );
+        },
+      ),
+    );
   }
 }

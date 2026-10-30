@@ -3,7 +3,7 @@ import 'package:store_app_clean_arch/features/catrgories/domain/entities/categor
 class CategoryModel extends CategoryEntitey {
   CategoryModel({
     required super.id,
-    required super.icon,
+    required super.image,
     required super.name,
     required super.description,
   });
@@ -12,7 +12,7 @@ class CategoryModel extends CategoryEntitey {
       id: json['id'],
       name: json['name'],
       description: json['description'],
-      icon: json['icon'],
+      image: json['image'],
     );
   }
 }

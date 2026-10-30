@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:store_app_clean_arch/features/catrgories/domain/entities/category_entitey.dart';
 
-
 class CategoryCard extends StatelessWidget {
   final CategoryEntitey category;
   final VoidCallback? onTap;
@@ -11,21 +10,6 @@ class CategoryCard extends StatelessWidget {
     required this.category,
     this.onTap,
   });
-
-  IconData get categoryIcon {
-    switch (category.icon) {
-      case 'men':
-        return Icons.man;
-      case 'women':
-        return Icons.woman;
-      case 'shoes':
-        return Icons.directions_run;
-      case 'bags':
-        return Icons.shopping_bag_outlined;
-      default:
-        return Icons.category_outlined;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,16 +25,21 @@ class CategoryCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: const Color(0xFFF5F1E9),
-                  borderRadius: BorderRadius.circular(18),
-                ),
-                child: Icon(
-                  categoryIcon,
-                  size: 65,
-                  color: const Color(0xFF9B7953),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(18),
+                child: Image.asset(
+                  category.image,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return const Center(
+                      child: Icon(
+                        Icons.image_not_supported_outlined,
+                        size: 40,
+                        color: Colors.grey,
+                      ),
+                    );
+                  },
                 ),
               ),
             ),

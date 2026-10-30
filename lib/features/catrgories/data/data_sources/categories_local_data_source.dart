@@ -1,35 +1,37 @@
+
 import 'package:store_app_clean_arch/features/catrgories/data/models/category_model.dart';
 
 class CategoriesLocalDataSource {
-    Future<List<CategoryModel>> getCategory() async{
-       final List<Map<String, dynamic>> categories = [
+  Future<List<CategoryModel>> getCategory() async {
+    final List<Map<String, dynamic>> categories = [
       {
         'id': '1',
         'name': 'Men',
         'description': 'Clothing & outfits',
-        'icon': 'men',
+        'image': 'assets/men.jpg',
       },
       {
         'id': '2',
         'name': 'Women',
         'description': 'Fashion & outfits',
-        'icon': 'women',
+        'image': 'assets/wamen.jpg',
       },
       {
         'id': '3',
         'name': 'Shoes',
         'description': 'All shoe styles',
-        'icon': 'shoes',
+        'image': 'assets/shoose.jpg',
       },
       {
         'id': '4',
         'name': 'Bags',
         'description': 'Everyday essentials',
-        'icon': 'bags',
+        'image': 'assets/bag.jpg',
       },
     ];
-    return categories.map((category) => CategoryModel.fromJson(category)).toList();
 
-
-    }
+    return categories
+        .map((category) => CategoryModel.fromJson(category))
+        .toList();
+  }
 }
