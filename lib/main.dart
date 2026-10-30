@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:store_app_clean_arch/features/home/presentation/views/home_view.dart';
+import 'package:store_app_clean_arch/features/home/presentation/views/main_view.dart';
 
 import 'package:store_app_clean_arch/firebase_options.dart';
 
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
 
-      home:HomeView() ,
+      home:MainView () ,
     );
   }
 }

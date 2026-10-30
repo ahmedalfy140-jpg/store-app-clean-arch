@@ -4,7 +4,7 @@ class CustomBottomBar extends StatelessWidget {
   const CustomBottomBar({super.key, required this.currentIndex, required this.onTap});
     final int currentIndex;
   final ValueChanged<int> onTap;
-   static const Color beige = Color(0xFFF5F1E9);
+   static const Color beige = Color.fromARGB(255, 124, 120, 113);
   static const Color selectedColor = Color(0xFF9B7953);
 
   @override
