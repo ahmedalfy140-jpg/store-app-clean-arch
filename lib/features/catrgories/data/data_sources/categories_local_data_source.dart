@@ -8,7 +8,7 @@ class CategoriesLocalDataSource {
         'id': '1',
         'name': 'Men',
         'description': 'Clothing & outfits',
-        'image': 'assets/men.jpg',
+        'image': 'assets/men.png',
       },
       {
         'id': '2',
