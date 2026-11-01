@@ -2,36 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store_app_clean_arch/features/cart/presentation/manager/cubit/cart_cubit.dart';
 import 'package:store_app_clean_arch/features/products/domain/entities/product_entity.dart';
+import 'package:store_app_clean_arch/features/products/presentation/manager/cubit/favorite_cupit.dart';
 import 'package:store_app_clean_arch/features/products/presentation/views/product_details_view.dart';
 
 class ProductCard extends StatelessWidget {
   final ProductEntity product;
 
-  const ProductCard({
-    super.key,
-    required this.product,
-  });
+  const ProductCard({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-      final cartCubit = context.read<CartCubit>();
+      onTap: () {
+        final cartCubit = context.read<CartCubit>();
 
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (routeContext) {
-        return BlocProvider.value(
-          value: cartCubit,
-          child: ProductDetailsView(
-            product: product,
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (routeContext) {
+              return BlocProvider.value(
+                value: cartCubit,
+                child: ProductDetailsView(product: product),
+              );
+            },
           ),
         );
-      },
-    ),
-  );
-
       },
       child: Container(
         decoration: BoxDecoration(
@@ -42,20 +37,47 @@ class ProductCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: ClipRRect(
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(16),
-                ),
-                child: Image.network(
-                  product.image,
-                  width: double.infinity,
-                  fit: BoxFit.contain,
-                  errorBuilder: (context, error, stackTrace) {
-                    return const Center(
-                      child: Icon(Icons.image_not_supported_outlined),
-                    );
-                  },
-                ),
+              child: Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: const BorderRadius.vertical(
+                      top: Radius.circular(16),
+                    ),
+                    child: Image.network(
+                      product.image,
+                      width: double.infinity,
+                      fit: BoxFit.contain,
+                      errorBuilder: (context, error, stackTrace) {
+                        return const Center(
+                          child: Icon(Icons.image_not_supported_outlined),
+                        );
+                      },
+                    ),
+                  ),
+                  Positioned(
+                    top: 5,
+                    right: 5,
+                    child: BlocBuilder<FavoritesCubit, List<ProductEntity>>(
+                      builder: (context, favorites) {
+                        final isFavorite = favorites.any(
+                          (item) => item.id == product.id,
+                        );
+
+                        return IconButton(
+                          onPressed: () {
+                            context.read<FavoritesCubit>().toggleFavorite(
+                              product,
+                            );
+                          },
+                          icon: Icon(
+                            isFavorite ? Icons.favorite : Icons.favorite_border,
+                            color: isFavorite ? Colors.red : Colors.grey,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
             Padding(
@@ -84,11 +106,7 @@ class ProductCard extends StatelessWidget {
                   const SizedBox(height: 5),
                   Row(
                     children: [
-                      const Icon(
-                        Icons.star,
-                        color: Colors.amber,
-                        size: 16,
-                      ),
+                      const Icon(Icons.star, color: Colors.amber, size: 16),
                       const SizedBox(width: 4),
                       Text(
                         '${product.rate} (${product.count})',

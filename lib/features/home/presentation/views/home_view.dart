@@ -10,6 +10,7 @@ import 'package:store_app_clean_arch/features/categories/data/repositories/categ
 import 'package:store_app_clean_arch/features/products/data/data_sources/products_remote_data_source.dart';
 import 'package:store_app_clean_arch/features/products/data/repositories/products_repository_impl.dart';
 import 'package:store_app_clean_arch/features/products/domain/use_cases/get_products_use_case.dart';
+import 'package:store_app_clean_arch/features/products/presentation/manager/cubit/favorite_cupit.dart';
 import 'package:store_app_clean_arch/features/products/presentation/manager/cubit/products_cubit.dart';
 
 import 'package:store_app_clean_arch/features/home/presentation/views/widgets/home_view_body.dart';
@@ -36,6 +37,7 @@ class HomeView extends StatelessWidget {
            GetProductsUseCase(ProductsRepositoryImpl(ProductsRemoteDataSource(Dio()) ))
           )..getproduct(),
         ),
+       
       ],
       child: const Scaffold(
         backgroundColor: Color(0xFFF5F1E9),
