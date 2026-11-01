@@ -6,6 +6,7 @@ import 'package:store_app_clean_arch/features/auth/presentation/manager/cubit/au
 import 'package:store_app_clean_arch/features/auth/presentation/views/widgets/custom_botton.dart';
 import 'package:store_app_clean_arch/features/auth/presentation/views/widgets/custom_text_field.dart';
 import 'package:store_app_clean_arch/features/home/presentation/views/home_view.dart';
+import 'package:store_app_clean_arch/features/home/presentation/views/main_view.dart';
 
 class SignUpView extends StatefulWidget {
   const SignUpView({super.key});
@@ -143,7 +144,7 @@ class _SignUpViewState extends State<SignUpView> {
                             listener: (context, state) {
                              if(state is AuthCubitSucsess){
                                 showsnackbar(context,  'Sign Up successful!');
-                              Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => HomeView(),));
+                              Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => MainView(),));
                               
                               
                              }else if (state is AuthCubitFailure){

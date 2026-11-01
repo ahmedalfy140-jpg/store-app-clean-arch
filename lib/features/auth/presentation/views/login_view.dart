@@ -7,6 +7,7 @@ import 'package:store_app_clean_arch/features/auth/presentation/views/signup_vie
 import 'package:store_app_clean_arch/features/auth/presentation/views/widgets/custom_botton.dart';
 import 'package:store_app_clean_arch/features/auth/presentation/views/widgets/custom_text_field.dart';
 import 'package:store_app_clean_arch/features/home/presentation/views/home_view.dart';
+import 'package:store_app_clean_arch/features/home/presentation/views/main_view.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -168,7 +169,7 @@ final TextEditingController passwordController = TextEditingController();
                             listener: (context, state) {
                               if (state is AuthCubitSucsess) {
                                 showsnackbar(context, 'Login successful!');
-                                Navigator.pushReplacement(context,MaterialPageRoute(builder: ((context) => HomeView())));
+                                Navigator.pushReplacement(context,MaterialPageRoute(builder: ((context) => MainView())));
                               } else if (state is AuthCubitFailure) {
                                 showsnackbar(context, state.errorMessage);
                               }

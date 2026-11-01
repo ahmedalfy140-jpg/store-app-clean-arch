@@ -1,11 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'package:store_app_clean_arch/features/home/presentation/views/home_view.dart';
 import 'package:store_app_clean_arch/features/home/presentation/views/main_view.dart';
-import 'package:store_app_clean_arch/features/onBoarding/presentation/views/onboarding_view.dart';
-
 import 'package:store_app_clean_arch/firebase_options.dart';
 
 void main() async {
@@ -29,7 +25,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
 
-      home:OnboardingView(),
+      home:MainView(),
     );
   }
 }

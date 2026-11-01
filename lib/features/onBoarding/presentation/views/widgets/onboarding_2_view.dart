@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:store_app_clean_arch/features/auth/presentation/views/login_view.dart';
+
 import 'package:store_app_clean_arch/features/home/presentation/views/home_view.dart';
+import 'package:store_app_clean_arch/features/home/presentation/views/main_view.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
    void _onIntroEnd ( BuildContext context){
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=>const HomeView()));
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=>const MainView()));
   }
 
   static const _blue = Color(0xFF1A2BFF);
