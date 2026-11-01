@@ -1,10 +1,16 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:store_app_clean_arch/features/catrgories/data/data_sources/categories_local_data_source.dart';
-import 'package:store_app_clean_arch/features/catrgories/data/repositories/categories_repository_impl.dart';
-import 'package:store_app_clean_arch/features/catrgories/domain/repositories/categories_repository.dart';
+
 import 'package:store_app_clean_arch/features/catrgories/domain/use_case/get_categoris_use_case.dart';
 import 'package:store_app_clean_arch/features/catrgories/presentation/manager/cubit/categorey_cubit.dart';
+import 'package:store_app_clean_arch/features/catrgories/data/data_sources/categories_local_data_source.dart';
+import 'package:store_app_clean_arch/features/catrgories/data/repositories/categories_repository_impl.dart';
+
+import 'package:store_app_clean_arch/features/products/data/data_sources/products_remote_data_source.dart';
+import 'package:store_app_clean_arch/features/products/data/repositories/products_repository_impl.dart';
+import 'package:store_app_clean_arch/features/products/domain/use_cases/get_products_use_case.dart';
+import 'package:store_app_clean_arch/features/products/presentation/manager/cubit/products_cubit.dart';
 
 import 'package:store_app_clean_arch/features/home/presentation/views/widgets/home_view_body.dart';
 
@@ -13,16 +19,28 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CategoreyCubit(GetCategorisUseCase(CategoriesRepositoryImpl(CategoriesLocalDataSource())))..getCategory(),
-     
-    
-      child: Scaffold(
-        backgroundColor: const Color(0xFFF5F1E9),
-      
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => CategoreyCubit(
+            GetCategorisUseCase(
+              CategoriesRepositoryImpl(
+                CategoriesLocalDataSource(),
+              ),
+            ),
+          )..getCategory(),
+        ),
+
+        BlocProvider(
+          create: (context) => ProductCubit(
+           GetProductsUseCase(ProductsRepositoryImpl(ProductsRemoteDataSource(Dio()) ))
+          )..getproduct(),
+        ),
+      ],
+      child: const Scaffold(
+        backgroundColor: Color(0xFFF5F1E9),
         body: HomeViewBody(),
       ),
     );
   }
 }
-

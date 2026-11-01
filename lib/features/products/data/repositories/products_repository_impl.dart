@@ -6,7 +6,7 @@ import 'package:store_app_clean_arch/features/products/domain/repositories/produ
 class ProductsRepositoryImpl implements ProductsRepository {
   final ProductsRemoteDataSource remoteDataSource;
 
-  ProductsRepositoryImpl({required this.remoteDataSource});
+  ProductsRepositoryImpl( this.remoteDataSource);
   @override
   Future<List<ProductEntity>> getproduct() async{
     return await remoteDataSource.getproduct();
