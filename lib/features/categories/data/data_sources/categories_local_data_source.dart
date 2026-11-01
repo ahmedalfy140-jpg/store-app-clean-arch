@@ -1,5 +1,5 @@
 
-import 'package:store_app_clean_arch/features/catrgories/data/models/category_model.dart';
+import 'package:store_app_clean_arch/features/categories/data/models/category_model.dart';
 
 class CategoriesLocalDataSource {
   Future<List<CategoryModel>> getCategory() async {

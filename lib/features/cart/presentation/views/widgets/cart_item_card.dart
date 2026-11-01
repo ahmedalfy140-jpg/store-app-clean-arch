@@ -97,6 +97,7 @@ class CartItemCard extends StatelessWidget {
 
           IconButton(
             onPressed: () {
+              
               cartCubit.removeProduct(item.id);
             },
             icon: const Icon(

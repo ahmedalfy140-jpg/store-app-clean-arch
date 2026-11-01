@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:store_app_clean_arch/features/catrgories/presentation/manager/cubit/categorey_cubit.dart';
-import 'package:store_app_clean_arch/features/catrgories/presentation/view/widget/category_card.dart';
+import 'package:store_app_clean_arch/features/categories/presentation/manager/cubit/categorey_cubit.dart';
+import 'package:store_app_clean_arch/features/categories/presentation/view/widget/category_card.dart';
 
 
 class CategoriesViewBody extends StatelessWidget {

@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
-import 'package:store_app_clean_arch/features/catrgories/domain/entities/category_entitey.dart';
+import 'package:store_app_clean_arch/features/categories/domain/entities/category_entitey.dart';
 
-import 'package:store_app_clean_arch/features/catrgories/domain/use_case/get_categoris_use_case.dart';
+import 'package:store_app_clean_arch/features/categories/domain/use_case/get_categoris_use_case.dart';
 
 part 'categorey_state.dart';
 

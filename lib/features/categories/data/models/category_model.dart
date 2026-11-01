@@ -1,4 +1,4 @@
-import 'package:store_app_clean_arch/features/catrgories/domain/entities/category_entitey.dart';
+import 'package:store_app_clean_arch/features/categories/domain/entities/category_entitey.dart';
 
 class CategoryModel extends CategoryEntitey {
   CategoryModel({

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store_app_clean_arch/features/cart/data/repositories/cart_repository_impl.dart';
 import 'package:store_app_clean_arch/features/cart/presentation/manager/cubit/cart_cubit.dart';
-import 'package:store_app_clean_arch/features/catrgories/presentation/view/category_card_view.dart';
+import 'package:store_app_clean_arch/features/categories/presentation/view/category_card_view.dart';
 import 'package:store_app_clean_arch/features/home/presentation/manager/bottom_nav_cubit.dart';
 import 'package:store_app_clean_arch/features/home/presentation/views/favorites_view.dart';
 import 'package:store_app_clean_arch/features/home/presentation/views/home_view.dart';

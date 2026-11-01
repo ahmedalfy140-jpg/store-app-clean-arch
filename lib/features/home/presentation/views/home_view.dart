@@ -2,10 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:store_app_clean_arch/features/catrgories/domain/use_case/get_categoris_use_case.dart';
-import 'package:store_app_clean_arch/features/catrgories/presentation/manager/cubit/categorey_cubit.dart';
-import 'package:store_app_clean_arch/features/catrgories/data/data_sources/categories_local_data_source.dart';
-import 'package:store_app_clean_arch/features/catrgories/data/repositories/categories_repository_impl.dart';
+import 'package:store_app_clean_arch/features/categories/domain/use_case/get_categoris_use_case.dart';
+import 'package:store_app_clean_arch/features/categories/presentation/manager/cubit/categorey_cubit.dart';
+import 'package:store_app_clean_arch/features/categories/data/data_sources/categories_local_data_source.dart';
+import 'package:store_app_clean_arch/features/categories/data/repositories/categories_repository_impl.dart';
 
 import 'package:store_app_clean_arch/features/products/data/data_sources/products_remote_data_source.dart';
 import 'package:store_app_clean_arch/features/products/data/repositories/products_repository_impl.dart';

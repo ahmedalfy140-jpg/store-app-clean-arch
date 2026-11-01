@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:store_app_clean_arch/features/catrgories/domain/entities/category_entitey.dart';
+import 'package:store_app_clean_arch/features/categories/domain/entities/category_entitey.dart';
 
 class HomeCategoriesCard extends StatelessWidget {
   const HomeCategoriesCard({super.key, required this.category, this.onTap});
