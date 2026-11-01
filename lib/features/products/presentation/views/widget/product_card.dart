@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:store_app_clean_arch/features/cart/presentation/manager/cubit/cart_cubit.dart';
 import 'package:store_app_clean_arch/features/products/domain/entities/product_entity.dart';
 import 'package:store_app_clean_arch/features/products/presentation/views/product_details_view.dart';
 
@@ -14,7 +16,22 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>ProductDetailsView(product: product)));
+      final cartCubit = context.read<CartCubit>();
+
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (routeContext) {
+        return BlocProvider.value(
+          value: cartCubit,
+          child: ProductDetailsView(
+            product: product,
+          ),
+        );
+      },
+    ),
+  );
+
       },
       child: Container(
         decoration: BoxDecoration(

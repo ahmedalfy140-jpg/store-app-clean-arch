@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:store_app_clean_arch/features/cart/presentation/manager/cubit/cart_cubit.dart';
 import 'package:store_app_clean_arch/features/products/domain/entities/product_entity.dart';
 
 class ProductDetailsView extends StatelessWidget {
@@ -102,7 +104,16 @@ class ProductDetailsView extends StatelessWidget {
               width: double.infinity,
               height: 55,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.read<CartCubit>().addProduct(product);
+
+  ScaffoldMessenger.of(context).showSnackBar(
+    const SnackBar(
+      content: Text('Product added to cart successfully'),
+      duration: Duration(seconds: 2),
+    ),
+  );
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF9B7953),
                   foregroundColor: Colors.white,

@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:store_app_clean_arch/features/cart/data/repositories/cart_repository_impl.dart';
+import 'package:store_app_clean_arch/features/cart/domain/repositories/cart_repository.dart';
 import 'package:store_app_clean_arch/features/cart/presentation/manager/cubit/cart_state.dart';
 import 'package:store_app_clean_arch/features/products/domain/entities/product_entity.dart';
 
 class CartCubit extends Cubit<CartState> {
-  final CartRepositoryImpl repository;
+  final CartRepository repository;
 
   CartCubit(this.repository) : super(CartInitial()) {
     _emitCart();
