@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store_app_clean_arch/features/auth/data/repositories/auth_repositories_impl.dart';
 import 'package:store_app_clean_arch/features/auth/data/services/firebase_auth_service.dart';
 import 'package:store_app_clean_arch/features/auth/presentation/manager/cubit/auth_cubit_cubit.dart';
+import 'package:store_app_clean_arch/features/auth/presentation/views/login_view.dart';
 import 'package:store_app_clean_arch/features/auth/presentation/views/widgets/custom_botton.dart';
 import 'package:store_app_clean_arch/features/auth/presentation/views/widgets/custom_text_field.dart';
 import 'package:store_app_clean_arch/features/home/presentation/views/home_view.dart';
@@ -42,48 +43,45 @@ class _SignUpViewState extends State<SignUpView> {
                 top: 25,
                 left: 25,
                 right: 25,
-                child: Form(
-                  key: fromkey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                  
-                    children: [
-                      Text(
-                        'STYLE',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 7,
-                        ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                
+                  children: [
+                    Text(
+                      'STYLE',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 7,
                       ),
-                      SizedBox(height: 5),
-                      Text(
-                        'F A S H I O N   S T O R E',
-                        style: TextStyle(
-                          color: Colors.white70,
-                          fontSize: 11,
-                  
-                          letterSpacing: 1,
-                        ),
+                    ),
+                    SizedBox(height: 5),
+                    Text(
+                      'F A S H I O N   S T O R E',
+                      style: TextStyle(
+                        color: Colors.white70,
+                        fontSize: 11,
+                
+                        letterSpacing: 1,
                       ),
-                      SizedBox(height: 180),
-                      Text(
-                        'Create Your\nAccount',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 54,
-                          height: 1,
-                          fontWeight: FontWeight.w600,
-                        ),
+                    ),
+                    SizedBox(height: 180),
+                    Text(
+                      'Create Your\nAccount',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 54,
+                        height: 1,
+                        fontWeight: FontWeight.w600,
                       ),
-                      SizedBox(height: 15),
-                      Text(
-                        'Join our fashion community\nand get a latest trends  ',
-                        style: TextStyle(color: Colors.white70, fontSize: 17),
-                      ),
-                    ],
-                  ),
+                    ),
+                    SizedBox(height: 15),
+                    Text(
+                      'Join our fashion community\nand get a latest trends  ',
+                      style: TextStyle(color: Colors.white70, fontSize: 17),
+                    ),
+                  ],
                 ),
               ),
               Positioned(
@@ -97,101 +95,109 @@ class _SignUpViewState extends State<SignUpView> {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(24.0),
-                    child: Column(children: [
-                      CustomTextFormField(
-                        onchange: (data){
-                          emailAdreess=data;
-      
-                        },
-                        validator: (value){
-                          if(value ==null || value.isEmpty){
-                             return 'Please enter your email';
-                          }if(!RegExp( r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',).hasMatch(value)){
-                              return 'Please enter a valid email address';
-                          }
-                          return null;
-                        },
-                        labelText: 'Email Address',
-                        iconData: Icons.email_outlined,
-                      ),
-                      SizedBox(height: 15,),
-                      CustomTextFormField(
-                          validator: (data) {
-                          if (data == null || data.isEmpty) {
-                            return 'please enter ypur password';
-                          }
-                          if (data.length < 6) {
-                            return 'Password must be at least 6 characters';
-                          }
-                          return null;
-                        },
-                        onchange: (data){
-                          password=data;
-                        },
-                        isobscure: _isObscured,
-                        iconButton: IconButton(onPressed:(){
-                          setState(() {
-                            _isObscured=!_isObscured;
-                          });
-                        } , icon: Icon(_isObscured ? Icons.visibility_off : Icons.visibility)),
-      
-                         labelText: 'Password',
-                        iconData: Icons.lock_outline,
-                      ),
-                    
-                          SizedBox(height: 20,),
-                          BlocConsumer<AuthCubitCubit, AuthCubitState>(
-                            listener: (context, state) {
-                             if(state is AuthCubitSucsess){
-                                showsnackbar(context,  'Sign Up successful!');
-                              Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => MainView(),));
-                              
-                              
-                             }else if (state is AuthCubitFailure){
-                              showsnackbar(context, state.errorMessage);
-                             }
-                            },
-                            builder: (context, state) {
-                             if (state is AuthCubitLoading){
-                              return Center(child: CircularProgressIndicator());
-                             }
-                              return customButton(nameButton: 'Sign Up',onpressed: ()async{
-                                if(fromkey.currentState!.validate()){
-                                 await context.read<AuthCubitCubit>().rgister(email: emailAdreess!, password: password!);
-                               
-                                }
-                              
-      
-                            },);
-                            },
+                    child: Form(
+                      key: fromkey,
+                      child: Column(children: [
+                        CustomTextFormField(
+                          onchange: (data){
+                            emailAdreess=data;
+                            
+                          },
+                          validator: (value){
+                            if(value ==null || value.isEmpty){
+                               return 'Please enter your email';
+                            }if(!RegExp( r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',).hasMatch(value)){
+                                return 'Please enter a valid email address';
+                            }
+                            return null;
+                          },
+                          labelText: 'Email Address',
+                          iconData: Icons.email_outlined,
+                        ),
+                        SizedBox(height: 15,),
+                        CustomTextFormField(
+                            validator: (data) {
+                            if (data == null || data.isEmpty) {
+                              return 'please enter ypur password';
+                            }
+                            if (data.length < 6) {
+                              return 'Password must be at least 6 characters';
+                            }
+                            return null;
+                          },
+                          onchange: (data){
+                            password=data;
+                          },
+                          isobscure: _isObscured,
+                          iconButton: IconButton(onPressed:(){
+                            setState(() {
+                              _isObscured=!_isObscured;
+                            });
+                          } , icon: Icon(_isObscured ? Icons.visibility_off : Icons.visibility)),
+                            
+                           labelText: 'Password',
+                          iconData: Icons.lock_outline,
+                        ),
+                      
+                            SizedBox(height: 20,),
+                            BlocConsumer<AuthCubitCubit, AuthCubitState>(
+                              listener: (context, state) {
+                               if(state is AuthCubitSucsess){
+                                  showsnackbar(context,  'Sign Up successful!');
+                                Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => MainView(),));
+                                
+                                
+                               }else if (state is AuthCubitFailure){
+                                showsnackbar(context, state.errorMessage);
+                               }
+                              },
+                              builder: (context, state) {
+                               if (state is AuthCubitLoading){
+                                return Center(child: CircularProgressIndicator());
+                               }
+                                return customButton(nameButton: 'Sign Up',onpressed: ()async{
+                                  if(fromkey.currentState!.validate()){
+                                   await context.read<AuthCubitCubit>().rgister(email: emailAdreess!, password: password!);
+                                 
+                                  }
+                                
+                            
+                              },);
+                              },
+                             
+                            ),
                            
-                          ),
-                         
-                          const SizedBox(height: 24),
-      
-                      // Register Link
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text("Already have an account?  "),
-                          GestureDetector(
-                            onTap: () {
-                              // Navigate to registration screen
-                              Navigator.pop(context);
-                              
-                            },
-                            child: const Text(
-                              'Login',
-                              style: TextStyle(
-                                color: Colors.blueAccent,
-                                fontWeight: FontWeight.bold,
+                            const SizedBox(height: 24),
+                            
+                        // Register Link
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text("Already have an account?  "),
+                            GestureDetector(
+                              onTap: () {
+                                // Navigate to registration screen
+                                // Navigator.pop(context);
+                                  Navigator.pushReplacement(context,
+                                      MaterialPageRoute(
+                                        builder: (_) => const LoginView(),
+                                      ),
+                                    );
+                                
+                              },
+                              child: const Text(
+                                'Login',
+                                style: TextStyle(
+                                  color: Colors.blueAccent,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                          
-                    ]),
+                          ],
+                        ),
+                            
+                      ]),
+                    ),
                   ),
                 ),
               ),

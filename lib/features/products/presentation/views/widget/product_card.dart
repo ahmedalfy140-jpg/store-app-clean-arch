@@ -15,13 +15,17 @@ class ProductCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         final cartCubit = context.read<CartCubit>();
+        final favoritesCubit = context.read<FavoritesCubit>();
 
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (routeContext) {
-              return BlocProvider.value(
-                value: cartCubit,
+              return MultiBlocProvider(
+                providers: [
+                  BlocProvider.value(value: cartCubit),
+                  BlocProvider.value(value: favoritesCubit),
+                ],
                 child: ProductDetailsView(product: product),
               );
             },

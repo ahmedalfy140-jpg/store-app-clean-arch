@@ -9,10 +9,11 @@ import 'package:store_app_clean_arch/features/home/presentation/manager/bottom_n
 
 
 import 'package:store_app_clean_arch/features/home/presentation/views/home_view.dart';
-import 'package:store_app_clean_arch/features/home/presentation/views/profile_view.dart';
+  
 import 'package:store_app_clean_arch/features/home/presentation/views/widgets/custom_bottom_bar.dart';
 import 'package:store_app_clean_arch/features/products/presentation/manager/cubit/favorite_cupit.dart';
 import 'package:store_app_clean_arch/features/products/presentation/views/favorites_view.dart';
+import 'package:store_app_clean_arch/features/profile/presentation/views/profile_view.dart';
 
 class MainView extends StatelessWidget {
   const MainView({super.key});

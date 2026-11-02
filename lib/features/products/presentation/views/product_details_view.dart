@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store_app_clean_arch/features/cart/presentation/manager/cubit/cart_cubit.dart';
 import 'package:store_app_clean_arch/features/products/domain/entities/product_entity.dart';
+import 'package:store_app_clean_arch/features/products/presentation/manager/cubit/favorite_cupit.dart';
 
 class ProductDetailsView extends StatelessWidget {
   final ProductEntity product;
 
-  const ProductDetailsView({
-    super.key,
-    required this.product,
-  });
+  const ProductDetailsView({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +18,7 @@ class ProductDetailsView extends StatelessWidget {
         elevation: 0,
         title: const Text(
           'Product Details',
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         iconTheme: const IconThemeData(color: Colors.black),
       ),
@@ -32,33 +27,46 @@ class ProductDetailsView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              height: 300,
-              width: double.infinity,
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
+            Stack(
+              children:[ Container(
+                height: 300,
+                width: double.infinity,
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Image.network(
+                  product.image,
+                  fit: BoxFit.contain,
+                  errorBuilder: (context, error, stackTrace) {
+                    return const Icon(
+                      Icons.image_not_supported_outlined,
+                      size: 50,
+                    );
+                  },
+                ),
               ),
-              child: Image.network(
-                product.image,
-                fit: BoxFit.contain,
-                errorBuilder: (context, error, stackTrace) {
-                  return const Icon(
-                    Icons.image_not_supported_outlined,
-                    size: 50,
-                  );
-                },
-              ),
-            ),
+              Positioned(
+                top: 5,
+                right: 5,
+                
+                child:BlocBuilder<FavoritesCubit,List<ProductEntity>>(builder: (context,favorites){
+                final isFavorite = favorites.any( 
+                  (item)=>item.id==product.id,
+            
+                );
+                return IconButton(onPressed: (){context.read<FavoritesCubit>().toggleFavorite(product);}, icon: Icon(isFavorite ? Icons.favorite :Icons.favorite_border,color: isFavorite ? Colors.red: Colors.grey,));
+            
+              }) )
+              
+              ]
+                      ),
             const SizedBox(height: 25),
 
             Text(
               product.title,
-              style: const TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
+              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 12),
 
@@ -83,10 +91,7 @@ class ProductDetailsView extends StatelessWidget {
 
             const Text(
               'Description',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
 
@@ -107,12 +112,12 @@ class ProductDetailsView extends StatelessWidget {
                 onPressed: () {
                   context.read<CartCubit>().addProduct(product);
 
-  ScaffoldMessenger.of(context).showSnackBar(
-    const SnackBar(
-      content: Text('Product added to cart successfully'),
-      duration: Duration(seconds: 2),
-    ),
-  );
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Product added to cart successfully'),
+                      duration: Duration(seconds: 2),
+                    ),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF9B7953),
@@ -123,10 +128,7 @@ class ProductDetailsView extends StatelessWidget {
                 ),
                 child: const Text(
                   'Add to Cart',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
             ),

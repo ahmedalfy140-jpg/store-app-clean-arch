@@ -33,9 +33,12 @@ dependencies:
   dio: ^5.11.1
   firebase_auth: ^7.0.1
   firebase_core: ^5.1.0
+ 
+  firebase_storage: ^14.0.1
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.1
+  image_picker: ^1.2.4
   introduction_screen: ^5.0.0
 
 dev_dependencies:

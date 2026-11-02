@@ -38,6 +38,7 @@ class HomeView extends StatelessWidget {
           )..getproduct(),
         ),
        
+       
       ],
       child: const Scaffold(
         backgroundColor: Color(0xFFF5F1E9),
